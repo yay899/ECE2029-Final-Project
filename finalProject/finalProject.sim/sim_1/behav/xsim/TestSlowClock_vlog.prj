@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../finalProject.srcs/sim_1/new/SimClock.v" \
+"../../../../finalProject.srcs/sim_1/new/TestSlowClock.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

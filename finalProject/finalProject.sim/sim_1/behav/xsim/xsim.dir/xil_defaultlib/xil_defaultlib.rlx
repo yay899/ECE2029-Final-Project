@@ -1,0 +1,13 @@
+0.6
+2019.1
+May 24 2019
+15:06:07
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.sim/sim_1/behav/xsim/glbl.v,1558713910,verilog,,,,glbl,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/SimClock.v,1575587398,verilog,,R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/Testbench.v,,SimClock,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/TestSlowClock.v,1575588874,verilog,,,,TestSlowClock,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/Testbench.v,1575589206,verilog,,,,Testbench,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/AnSelecter.v,1575585033,verilog,,R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/SimClock.v,,AnSelecter,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/BtnDebouncer.v,1575584050,verilog,,R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/DisplayLogic.v,,BtnDebouncer,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/DisplayLogic.v,1575585965,verilog,,R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/SimClock.v,,DisplayLogic,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/SlowClock.v,1575584373,verilog,,R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/StateMachine.v,,SlowClock,,,,,,,,
+R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/StateMachine.v,1575588079,verilog,,R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/Testbench.v,,StateMachine,,,,,,,,

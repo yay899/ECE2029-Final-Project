@@ -1,0 +1,7 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/AnSelecter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AnSelecter
+INFO: [VRFC 10-2263] Analyzing Verilog file "R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/SimClock.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module SimClock
+WARNING: [VRFC 10-3676] redeclaration of ansi port 'clk' is not allowed [R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/SimClock.v:27]
+INFO: [VRFC 10-2263] Analyzing Verilog file "R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sim_1/new/Testbench.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Testbench

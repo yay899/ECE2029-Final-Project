@@ -1,0 +1,26 @@
+
+*** Running vivado
+    with args -log RockPaperScissors.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source RockPaperScissors.tcl
+
+
+****** Vivado v2019.1 (64-bit)
+  **** SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source RockPaperScissors.tcl -notrace
+Command: synth_design -top RockPaperScissors -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 24664 
+ERROR: [Synth 8-2715] syntax error near end [R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/StateMachine.v:119]
+INFO: [Synth 8-2350] module StateMachine ignored due to previous errors [R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/StateMachine.v:23]
+Failed to read verilog 'R:/ECE2029/ECE2029-Final-Project/finalProject/finalProject.srcs/sources_1/new/StateMachine.v'
+INFO: [Common 17-83] Releasing license: Synthesis
+4 Infos, 0 Warnings, 0 Critical Warnings and 2 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  5 18:17:33 2019...
