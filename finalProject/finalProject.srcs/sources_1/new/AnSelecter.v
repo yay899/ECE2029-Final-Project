@@ -31,10 +31,10 @@ module AnSelecter(
         counter = counter + 1;
         
         case(counter)
-        0: an = 4'b0111;
-        1: an = 4'b1011;
-        2: an = 4'b1101;
-        3: an = 4'b1110;
+        0: an = 4'b1110;
+        1: an = 4'b1101;
+        2: an = 4'b1011;
+        3: an = 4'b0111;
         endcase
     end
 endmodule

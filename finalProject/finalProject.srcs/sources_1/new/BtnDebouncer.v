@@ -26,6 +26,9 @@ module BtnDebouncer(
     output reg pulse
     );
     
-    always @(posedge clk)
+    wire btnclk;
+    SlowClock C0(clk, 500000, btnclk);
+    
+    always @(posedge btnclk)
         pulse <= btn;
 endmodule

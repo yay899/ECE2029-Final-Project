@@ -24,20 +24,24 @@ module RockPaperScissors(
     input [2:0] btn,
     input clk,
     output [6:0] seg,
-    output [3:0] an
+    output [3:0] an,
+    output reg [2:0] led
     );
     
     wire rock, paper, scissors, btnclk, blinkclk;
     wire [2:0] state;
     
-    SlowClock C0(clk, 5000, btnclk);
-    SlowClock C1(clk, 250000, blinkclk);
-    
-    BtnDebouncer B0(btn[0], btnclk, rock);
-    BtnDebouncer B1(btn[1], btnclk, paper);
-    BtnDebouncer B2(btn[2], btnclk, scissors);
+    BtnDebouncer B0(btn[0], clk, rock);
+    BtnDebouncer B1(btn[1], clk, paper);
+    BtnDebouncer B2(btn[2], clk, scissors);
     
     StateMachine game(rock, paper, scissors, clk, state);
-    DisplayLogic disp(state, clk, blinkclk, an, seg);
+    DisplayLogic disp(state, clk, an, seg);
+    
+    always @(posedge clk) begin
+        led[0] = rock;
+        led[1] = paper;
+        led[2] = scissors;
+    end 
     
 endmodule

@@ -23,51 +23,63 @@
 module DisplayLogic(
     input [2:0] state,
     input clk,
-    input blinkclk,
-    output [3:0] an,
+    output reg [3:0] anReg,
     output reg [6:0] seg
     );
     
+    wire [3:0] anWire;
+    wire dispclk, blinkclk;
+    
     localparam WAIT = 0, P1R = 1, P1P = 2, P1S = 3, TIE = 4, P1W = 5, P2W = 6;
     localparam NULL = 7'b1111111, P = 7'b0011000, ONE = 7'b1001111, TWO = 7'b0010010;
+    localparam FIRST = 4'b0111, SECOND = 4'b1011, THIRD = 4'b1101, FOURTH = 4'b1110;
     
-    AnSelecter sel(clk, an);
+    SlowClock C0(clk, 1000000000, blinkclk);
+    SlowClock C1(clk, 50000, dispclk);
+    AnSelecter sel(dispclk, anWire);
+    
+    reg [3:0] blink = 0;
+    
+    always @(posedge blinkclk)
+        blink <= blink + 1;
     
     always @(posedge clk) begin
+        anReg = anWire;
+    
         case(state)
             // Player one's turn.
             WAIT: begin
-                case(an)
-                0: begin // First digit.
-                    if (blinkclk)
+                case(anWire)
+                FIRST: begin
+                    if (blink[3])
                         seg = P;
                     else
                         seg = NULL;
                 end
-                1: begin // Second digit.
-                    if (blinkclk)
+                SECOND: begin
+                    if (blink[3])
                         seg = ONE;
                     else
                         seg = NULL;
                 end
-                2: seg = P; // Third digit.
-                3: seg = TWO; // Fourth digit.
+                THIRD: seg = P;
+                FOURTH: seg = TWO;
                 endcase
             end
             
             // Player two's turn.
             P1R, P1P, P1S: begin
-                case(an)
-                0: seg = P; // First digit.
-                1: seg = ONE; // Second digit.
-                2: begin // Third digit.
-                    if (blinkclk)
+                case(anWire)
+                FIRST: seg = P;
+                SECOND: seg = ONE;
+                THIRD: begin
+                    if (blink[3])
                         seg = P;
                     else
                         seg = NULL;
                 end
-                3: begin // Fourth digit.
-                    if (blinkclk)
+                FOURTH: begin
+                    if (blink[3])
                         seg = TWO;
                     else
                         seg = NULL;
@@ -77,31 +89,31 @@ module DisplayLogic(
             
             // Tie.
             TIE: begin
-                case(an)
-                0: seg = P;
-                1: seg = ONE;
-                2: seg = P;
-                3: seg = TWO;
+                case(anWire)
+                FIRST: seg = P;
+                SECOND: seg = ONE;
+                THIRD: seg = P;
+                FOURTH: seg = TWO;
                 endcase
             end
             
             // P1 Win
             P1W: begin
-                case(an)
-                0: seg = P;
-                1: seg = ONE;
-                2: seg = NULL;
-                3: seg = NULL;
+                case(anWire)
+                FIRST: seg = P;
+                SECOND: seg = ONE;
+                THIRD: seg = NULL;
+                FOURTH: seg = NULL;
                 endcase
             end
             
             // P2 Win
             P2W: begin
-                case(an)
-                0: seg = NULL;
-                1: seg = NULL;
-                2: seg = P;
-                3: seg = TWO;
+                case(anWire)
+                FIRST: seg = NULL;
+                SECOND: seg = NULL;
+                THIRD: seg = P;
+                FOURTH: seg = TWO;
                 endcase
             end
         endcase

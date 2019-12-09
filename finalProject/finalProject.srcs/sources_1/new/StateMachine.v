@@ -32,81 +32,115 @@ module StateMachine(
     
     reg [2:0] currentState = WAIT;
     reg [2:0] nextState = WAIT;
+    reg depressed = 0;
     
     assign state = currentState;
     
     always @(posedge clk) begin
         currentState <= nextState;
-    end
     
-    always @(posedge rock, posedge paper, posedge scissors) begin        
-        case(currentState)
-        // Waiting for P1 input. 
-        WAIT: begin
-            if (rock)
-                nextState = P1R;
-            else if (paper)
-                nextState = P1P;
-            else if (scissors)
-                nextState = P1S;
-            else
-                nextState = WAIT;            
+        if (~(rock | paper | scissors))
+            depressed = 0;
+    
+        if (~depressed) begin
+            case(currentState)
+            // Waiting for P1 input. 
+            WAIT: begin
+                if (rock) begin
+                    nextState = P1R;
+                    depressed = 1;
+                end
+                else if (paper) begin
+                    nextState = P1P;
+                    depressed = 1;
+                end
+                else if (scissors) begin
+                    nextState = P1S;
+                    depressed = 1;
+                end
+                else
+                    nextState = WAIT;            
+            end
+            
+            // Waiting for P2 input after...
+            // P1 rock.
+            P1R: begin
+                if (rock) begin
+                    nextState = TIE;
+                    depressed = 1;
+                end
+                else if (paper) begin
+                    nextState = P2W;
+                    depressed = 1;
+                end
+                else if (scissors) begin
+                    nextState = P1W;
+                    depressed = 1;
+                end
+                else
+                    nextState = P1R;            
+            end
+            // P1 paper.
+            P1P: begin
+                if (rock) begin
+                    nextState = P1W;
+                    depressed = 1;
+                end
+                else if (paper) begin
+                    nextState = TIE;
+                    depressed = 1;
+                end
+                else if (scissors) begin
+                    nextState = P2W;
+                    depressed = 1;
+                end
+                else
+                    nextState = P1P;            
+            end
+            // P1 scissors.
+            P1S: begin
+                if (rock) begin
+                    nextState = P2W;
+                    depressed = 1;
+                end
+                else if (paper) begin
+                    nextState = P1W;
+                    depressed = 1;
+                end
+                else if (scissors) begin
+                    nextState = TIE;
+                    depressed = 1;
+                end
+                else
+                    nextState = P1S;            
+            end
+            
+            // After the game ends, reset to waiting for P1 input on any button press.
+            P1W: begin
+                if (rock | paper | scissors) begin
+                    nextState = WAIT;
+                    depressed = 1;
+                end
+                else
+                    nextState = P1W;
+            end
+            P2W: begin
+                if (rock | paper | scissors) begin
+                    nextState = WAIT;
+                    depressed = 1;
+                end
+                else
+                    nextState = P2W;
+            end
+            TIE: begin
+                if (rock | paper | scissors) begin
+                    nextState = WAIT;
+                    depressed = 1;
+                end
+                else
+                    nextState = TIE;
+            end
+            endcase
         end
-        
-        // Waiting for P2 input after...
-        // P1 rock.
-        P1R: begin
-            if (rock)
-                nextState = TIE;
-            else if (paper)
-                nextState = P2W;
-            else if (scissors)
-                nextState = P1W;
-            else
-                nextState = P1R;            
-        end
-        // P1 paper.
-        P1P: begin
-            if (rock)
-                nextState = P1W;
-            else if (paper)
-                nextState = TIE;
-            else if (scissors)
-                nextState = P2W;
-            else
-                nextState = P1P;            
-        end
-        // P1 scissors.
-        P1S: begin
-            if (rock)
-                nextState = P2W;
-            else if (paper)
-                nextState = P1W;
-            else if (scissors)
-                nextState = TIE;
-            else
-                nextState = P1S;            
-        end
-        
-        // After the game ends, reset to waiting for P1 input on any button press.
-        P1W: begin
-            if (rock | paper | scissors)
-                nextState = WAIT;
-            else
-                nextState = P1W;
-        end
-        P2W: begin
-            if (rock | paper | scissors)
-                nextState = WAIT;
-            else
-                nextState = P2W;
-        end
-        TIE: begin
-            if (rock | paper | scissors)
-                nextState = WAIT;
-            else
-                nextState = TIE;
-        end
-        endcase
     end
 endmodule
